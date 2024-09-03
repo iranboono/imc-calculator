@@ -84,23 +84,28 @@
         text-align: center;
       }
 
-      /* Contêiner para centralizar o gráfico e o texto */
+      /* Contêiner para o gráfico e o texto */
       .container {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
         width: 100%;
-        max-width: 600px; /* Limita a largura máxima para telas maiores */
+        max-width: 800px; /* Limita a largura máxima do contêiner */
         padding: 0 10px; /* Adiciona padding para garantir que o gráfico não toque as bordas */
+      }
+
+      /* Contêiner para alinhar o gráfico à direita */
+      .chart-container {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
       }
 
       /* Estilo para o gráfico */
       #chart_div {
-        width: 100%;
-        max-width: 100%; /* Garante que o gráfico não ultrapasse a largura do contêiner */
+        width: 400px;
         height: auto;
-        margin: 0 auto; /* Centraliza o gráfico horizontalmente */
+        margin: 0;
       }
 
       /* Estilo para o texto */
@@ -124,10 +129,12 @@
     </style>
   </head>
   <body>
-    <!-- Contêiner para centralizar o gráfico e o texto -->
+    <!-- Contêiner principal -->
     <div class="container">
-      <!-- Div onde o gráfico será desenhado -->
-      <div id="chart_div"></div>
+      <!-- Contêiner para o gráfico alinhado à direita -->
+      <div class="chart-container">
+        <div id="chart_div"></div>
+      </div>
       <!-- Div onde o resultado será exibido -->
       <div id="result"></div>
     </div>
