@@ -66,10 +66,20 @@
         text-align: center;
       }
 
+      /* Contêiner para centralizar o gráfico e o texto */
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 600px; /* Limita a largura máxima para telas maiores */
+        text-align: center;
+      }
+
       /* Estilo para o gráfico */
       #chart_div {
         width: 100%;
-        max-width: 600px; /* Limita a largura máxima para telas maiores */
         height: auto;
       }
 
@@ -78,7 +88,6 @@
         font-size: 16px;
         padding: 10px;
         margin-top: 20px; /* Espaço entre o gráfico e o texto */
-        text-align: center; /* Garante que o texto fique centralizado */
       }
 
       /* Estilo para telas menores */
@@ -90,9 +99,12 @@
     </style>
   </head>
   <body>
-    <!-- Div onde o gráfico será desenhado -->
-    <div id="chart_div"></div>
-    <!-- Div onde o resultado será exibido -->
-    <div id="result"></div>
+    <!-- Contêiner para centralizar o gráfico e o texto -->
+    <div class="container">
+      <!-- Div onde o gráfico será desenhado -->
+      <div id="chart_div"></div>
+      <!-- Div onde o resultado será exibido -->
+      <div id="result"></div>
+    </div>
   </body>
 </html>
