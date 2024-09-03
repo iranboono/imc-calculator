@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       // Função para capturar os parâmetros da URL
@@ -35,7 +36,7 @@
         ]);
 
         var options = {
-          width: 400, height: 200,
+          width: '100%', height: 200,
           greenFrom: 18.5, greenTo: 24.9,
           yellowFrom: 25, yellowTo: 29.9,
           redFrom: 30, redTo: 40,
@@ -51,11 +52,34 @@
         document.getElementById('result').innerHTML = `Olá, ${nome}! Seu IMC é ${imcValue}.`;
       }
     </script>
+    <style>
+      /* Ajustar o tamanho do gráfico para que ele se ajuste a telas menores */
+      #chart_div {
+        width: 100%;
+        max-width: 600px; /* Limita a largura máxima para telas maiores */
+        height: auto;
+        margin: 0 auto; /* Centraliza o gráfico horizontalmente */
+      }
+
+      /* Ajustar o tamanho do texto para diferentes tamanhos de tela */
+      #result {
+        font-size: 16px;
+        padding: 10px;
+        text-align: center;
+      }
+
+      /* Estilo para dispositivos móveis */
+      @media (max-width: 600px) {
+        #result {
+          font-size: 14px;
+        }
+      }
+    </style>
   </head>
   <body>
     <!-- Div onde o gráfico será desenhado -->
-    <div id="chart_div" style="width: 400px; height: 200px;"></div>
+    <div id="chart_div"></div>
     <!-- Div onde o resultado será exibido -->
-    <div id="result" style="font-size: 18px; margin-top: 20px;"></div>
+    <div id="result"></div>
   </body>
 </html>
