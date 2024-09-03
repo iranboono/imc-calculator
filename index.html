@@ -53,6 +53,7 @@
       }
     </script>
     <style>
+      /* Define o layout básico do body */
       body {
         margin: 0;
         padding: 0;
@@ -62,21 +63,25 @@
         align-items: center;
         justify-content: center;
         height: 100vh;
+        text-align: center;
       }
 
+      /* Estilo para o gráfico */
       #chart_div {
         width: 100%;
         max-width: 600px; /* Limita a largura máxima para telas maiores */
         height: auto;
       }
 
+      /* Estilo para o texto */
       #result {
         font-size: 16px;
         padding: 10px;
-        margin-top: 20px; /* Adiciona um espaço entre o gráfico e o texto */
+        margin-top: 20px; /* Espaço entre o gráfico e o texto */
         text-align: center; /* Garante que o texto fique centralizado */
       }
 
+      /* Estilo para telas menores */
       @media (max-width: 600px) {
         #result {
           font-size: 14px;
