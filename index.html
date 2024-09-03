@@ -1,8 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Calculadora de IMC</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+      /* Centraliza o conteúdo na página */
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        flex-direction: column;
+        background-color: #f4f4f4; /* Adiciona um fundo leve para destacar o gráfico */
+      }
+      #chart_div {
+        width: 400px;
+        height: 200px;
+      }
+      #result {
+        font-size: 18px;
+        margin-top: 20px;
+        text-align: center;
+      }
+      #debug {
+        font-size: 14px;
+        color: red;
+        margin-top: 20px;
+        text-align: center;
+      }
+    </style>
     <script type="text/javascript">
       // Função para capturar os parâmetros da URL
       function getQueryParams() {
@@ -23,12 +51,17 @@
         }
       }
 
-      google.charts.load('current', {'packages':['gauge']});
-      google.charts.setOnLoadCallback(drawChart);
-
+      // Função para desenhar o gráfico
       function drawChart() {
         const { altura, peso, nome } = getQueryParams();
+        
+        // Exibir os parâmetros para depuração
+        document.getElementById('debug').innerHTML = `Altura: ${altura}, Peso: ${peso}, Nome: ${nome}`;
+
+        console.log('Altura:', altura, 'Peso:', peso, 'Nome:', nome); // Verifique os valores capturados
+
         const imcValue = calcularIMC(peso, altura);
+        console.log('IMC Calculado:', imcValue); // Verifique o valor do IMC calculado
 
         var data = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
@@ -36,7 +69,7 @@
         ]);
 
         var options = {
-          width: '100%', height: 200,
+          width: 400, height: 200,
           greenFrom: 18.5, greenTo: 24.9,
           yellowFrom: 25, yellowTo: 29.9,
           redFrom: 30, redTo: 40,
@@ -51,35 +84,15 @@
         // Exibir o nome do usuário e o IMC calculado
         document.getElementById('result').innerHTML = `Olá, ${nome}! Seu IMC é ${imcValue}.`;
       }
+
+      // Carregar o pacote de gráficos do Google e chamar a função drawChart
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
     </script>
-    <style>
-      /* Ajustar o tamanho do gráfico para que ele se ajuste a telas menores */
-      #chart_div {
-        width: 100%;
-        max-width: 600px; /* Limita a largura máxima para telas maiores */
-        height: auto;
-        margin: 0 auto; /* Centraliza o gráfico horizontalmente */
-      }
-
-      /* Ajustar o tamanho do texto para diferentes tamanhos de tela */
-      #result {
-        font-size: 16px;
-        padding: 10px;
-        text-align: center;
-      }
-
-      /* Estilo para dispositivos móveis */
-      @media (max-width: 600px) {
-        #result {
-          font-size: 14px;
-        }
-      }
-    </style>
   </head>
   <body>
-    <!-- Div onde o gráfico será desenhado -->
     <div id="chart_div"></div>
-    <!-- Div onde o resultado será exibido -->
     <div id="result"></div>
+    <div id="debug"></div>
   </body>
 </html>
