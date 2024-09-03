@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      // Função para capturar os parâmetros da URL
+      function getQueryParams() {
+        const params = new URLSearchParams(window.location.search);
+        return {
+          altura: parseFloat(params.get('altura')) || 0,
+          peso: parseFloat(params.get('peso')) || 0,
+          nome: params.get('nome') || 'Visitante'
+        };
+      }
+
+      // Função para calcular o IMC
+      function calcularIMC(peso, altura) {
+        if (peso > 0 && altura > 0) {
+          return (peso / (altura * altura)).toFixed(2);
+        } else {
+          return 0;
+        }
+      }
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        const { altura, peso, nome } = getQueryParams();
+        const imcValue = calcularIMC(peso, altura);
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['IMC', parseFloat(imcValue)]
+        ]);
+
+        var options = {
+          width: 400, height: 200,
+          greenFrom: 18.5, greenTo: 24.9,
+          yellowFrom: 25, yellowTo: 29.9,
+          redFrom: 30, redTo: 40,
+          minorTicks: 5,
+          max: 40,
+          majorTicks: ['0', '10', '20', '30', '40']
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+        chart.draw(data, options);
+
+        // Exibir o nome do usuário e o IMC calculado
+        document.getElementById('result').innerHTML = `Olá, ${nome}! Seu IMC é ${imcValue}.`;
+      }
+    </script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 400px; height: 200px;"></div>
+    <div id="result" style="font-size: 18px; margin-top: 20px;"></div>
+  </body>
+</html>
